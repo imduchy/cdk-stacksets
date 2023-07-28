@@ -28,7 +28,7 @@ class BaselineResourcesStack(StackSetStack):
                         'ecs:List',
                         'ecs:Describe'
                     ],
-                    resources=[f'arn:{Aws.PARTITION}:ecs:{Aws.REGION}:{Aws.ACCOUNT_ID}']
+                    resources=[f'arn:${Aws.PARTITION}:ecs:{Aws.REGION}:{Aws.ACCOUNT_ID}']
                 )
             ]
         )
