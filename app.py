@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 import aws_cdk as cdk
+from cdk_stacksets import StackSetTarget
+from baseline.stackset import BaselineStackSet
 
 from pipeline.pipeline import BaselinePipelineStack
 
@@ -34,5 +36,17 @@ BaselinePipelineStack(
         'prod_ou_id': parameters['prod_ou_id']
     }
 )
+
+# BaselineStackSet(
+#     app,
+#     'BaselineStackSetStackTest',
+#     props={
+#         'stackset_name': 'BaselineStackSetTestEnvironment',
+#         'target': StackSetTarget.from_organizational_units(
+#             regions=['eu-central-1', 'eu-west-1'],
+#             organizational_units=[parameters['sandbox_ou_id']]
+#         )
+#     }
+# )
 
 app.synth()

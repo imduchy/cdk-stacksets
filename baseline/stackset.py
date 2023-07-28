@@ -1,7 +1,6 @@
 import aws_cdk as cdk
 from cdk_stacksets import (Capability, DeploymentType, OperationPreferences,
-                           RegionConcurrencyType, StackSet, StackSetTarget,
-                           StackSetTemplate)
+                           RegionConcurrencyType, StackSet, StackSetTemplate)
 from constructs import Construct
 
 from baseline.resources import BaselineResourcesStack
@@ -18,7 +17,11 @@ class BaselineStackSet(cdk.Stack):
             'BaselineStackSet',
             stack_set_name=props['stackset_name'],
             description='StackSet containing baseline configuration for accounts in AWS Organization.',
-            deployment_type=DeploymentType.service_managed(),
+            deployment_type=DeploymentType.service_managed(
+                auto_deploy_enabled=True,
+                auto_deploy_retain_stacks=False,
+                delegated_admin=True
+            ),
             template=StackSetTemplate.from_stack_set_stack(baseline_resources),
             capabilities=[Capability.NAMED_IAM],
             target=props['target'],

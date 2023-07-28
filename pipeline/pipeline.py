@@ -20,9 +20,14 @@ class BaselinePipelineStack(cdk.Stack):
             'Synth',
             input=pipeline_input,
             commands=[
-                'pip install -r requirements.txt',
-                'npm install -g aws-cdk',
-                'cdk synth'
+                f'pip install -r requirements.txt',
+                f'npm install -g aws-cdk',
+                f'cdk synth'
+                f' -c codestar_connection_arn={props["codestar_connection_arn"]}'
+                f' -c repo_url={props["repo_url"]}'
+                f' -c repo_branch={props["repo_branch"]}'
+                f' -c sandbox_ou_id={props["sandbox_ou_id"]}'
+                f' -c prod_ou_id={props["prod_ou_id"]}'
             ]
         )
 
